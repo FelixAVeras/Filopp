@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:new_filopp/src/models/Restaurant.dart';
 import 'package:new_filopp/src/pages/category.dart';
+import 'package:new_filopp/src/pages/dashboard.dart';
 import 'package:new_filopp/src/pages/login.dart';
 import 'package:http/http.dart' as http;
+import 'package:new_filopp/src/pages/my_order.dart';
+import 'package:new_filopp/src/pages/user_profile.dart';
 import 'dart:async';
 import 'dart:convert';
-// import 'package:new_filopp/src/controllers/HomeController.dart';
+import 'package:qrcode_reader/qrcode_reader.dart';
 
 class HomePage extends StatefulWidget {
   final GlobalKey<ScaffoldState> parentScaffoldKey;
@@ -17,35 +20,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // HomeController _homeController;
+  int currentIndex = 0;
 
-  // _HomePageState() : super(HomeController()) {
-  //   _homeController = controller;
-  // }
+  _scanQr() async {
+    String futureString = '';
 
-  // final String apiUrl = "https://randomuser.me/api/?results=10";
-  // Future<List<dynamic>> fetchUsers() async {
-  //   var result = await http.get(apiUrl);
-  //   return json.decode(result.body)['results'];
-  // }
+    try {
+      futureString = await new QRCodeReader().scan();
+    } catch (e) {
+      futureString = e.toString();
+    }
 
-  // Future<http.Response> getContries() async {
-  //   // var response = await Dio().get('https://restcountries.eu/rest/v2/all');
-  //   // return http.get(Uri.https('jsonplaceholder.typicode.com', 'albums/1'));
-  //   return http.get(Uri.https('jsonplaceholder.typicode.com', 'albums/1'));
-  //   // print(response.data.length);
-
-  //   List<Restaurant> restaurants = [];
-  // }
+    if (futureString != null) {
+      print('Tenemos informacion');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    // getContries();
     return Scaffold(
       appBar: AppBar(
-        // automaticallyImplyLeading: false,
-        // backgroundColor: Colors.red,
-        // elevation: 0,
         centerTitle: true,
         title: Text('Inicio'),
         actions: [
@@ -56,132 +50,109 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Container(
-        height: 150,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            Container(
-                width: 300,
-                margin: EdgeInsets.all(10),
-                child: Card(
-                    semanticContainer: true,
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: InkWell(
-                      splashColor: Colors.red.withAlpha(30),
-                      onTap: () => {},
-                      child: Container(
-                        child: Column(
-                          children: [
-                            const ListTile(
-                              leading: Icon(Icons.restaurant),
-                              title: Text('Restaurante #1'),
-                              subtitle:
-                                  Text('Calle primera #12, sector, ciudad'),
-                            )
-                          ],
-                        ),
-                      ),
-                    ))),
-            Container(
-                width: 300,
-                margin: EdgeInsets.all(10),
-                child: Card(
-                    semanticContainer: true,
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: InkWell(
-                      splashColor: Colors.red.withAlpha(30),
-                      onTap: () => {},
-                      child: Container(
-                        child: Column(
-                          children: [
-                            const ListTile(
-                              leading: Icon(Icons.restaurant),
-                              title: Text('Restaurante #2'),
-                              subtitle:
-                                  Text('Calle primera #12, sector, ciudad'),
-                            )
-                          ],
-                        ),
-                      ),
-                    ))),
-            Container(
-                width: 300,
-                margin: EdgeInsets.all(10),
-                child: Card(
-                    semanticContainer: true,
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: InkWell(
-                      splashColor: Colors.red.withAlpha(30),
-                      onTap: () => {},
-                      child: Container(
-                        child: Column(
-                          children: [
-                            const ListTile(
-                              leading: Icon(Icons.restaurant),
-                              title: Text('Restaurante #3'),
-                              subtitle:
-                                  Text('Calle primera #12, sector, ciudad'),
-                            )
-                          ],
-                        ),
-                      ),
-                    ))),
-            Container(
-                width: 300,
-                margin: EdgeInsets.all(10),
-                child: Card(
-                    semanticContainer: true,
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: InkWell(
-                      splashColor: Colors.red.withAlpha(30),
-                      onTap: () => {},
-                      child: Container(
-                        child: Column(
-                          children: [
-                            const ListTile(
-                              leading: Icon(Icons.restaurant),
-                              title: Text('Restaurante #4'),
-                              subtitle:
-                                  Text('Calle primera #12, sector, ciudad'),
-                            )
-                          ],
-                        ),
-                      ),
-                    ))),
-          ],
-        ),
-      ),
-      // body: FutureBuilder<List<dynamic>>(
-      //   future: fetchUsers(),
-      //   builder: (BuildContext context, AsyncSnapshot snapshot) {
-      //     if (snapshot.hasData) {
-      //       print(snapshot.data[0]);
-      //       return ListView.builder(
-      //           padding: EdgeInsets.all(8),
-      //           itemCount: snapshot.data.length,
-      //           itemBuilder: (BuildContext context, int index) {
-      //             return Card(
-      //               child: Column(
-      //                 children: <Widget>[
-      //                   ListTile(
-      //                     leading: CircleAvatar(
-      //                         radius: 30,
-      //                         backgroundImage: NetworkImage(
-      //                             snapshot.data[index]['picture']['large'])),
-      //                     title: Text(snapshot.data[index]),
-      //                     subtitle: Text(snapshot.data[index]),
-      //                     trailing: Text(snapshot.data[index]),
-      //                   )
-      //                 ],
-      //               ),
-      //             );
-      //           });
-      //     } else {
-      //       return Center(child: CircularProgressIndicator());
-      //     }
-      //   },
+      body: _loadPage(currentIndex),
+      // body: Container(
+      //   height: 150,
+      //   child: ListView(
+      //     scrollDirection: Axis.horizontal,
+      //     children: [
+      //       Container(
+      //           width: 300,
+      //           margin: EdgeInsets.all(10),
+      //           child: Card(
+      //               semanticContainer: true,
+      //               clipBehavior: Clip.antiAliasWithSaveLayer,
+      //               child: InkWell(
+      //                 splashColor: Colors.red.withAlpha(30),
+      //                 onTap: () => {},
+      //                 child: Container(
+      //                   child: Column(
+      //                     children: [
+      //                       const ListTile(
+      //                         leading: Icon(Icons.restaurant),
+      //                         title: Text('Restaurante #1'),
+      //                         subtitle:
+      //                             Text('Calle primera #12, sector, ciudad'),
+      //                       )
+      //                     ],
+      //                   ),
+      //                 ),
+      //               ))),
+      //       Container(
+      //           width: 300,
+      //           margin: EdgeInsets.all(10),
+      //           child: Card(
+      //               semanticContainer: true,
+      //               clipBehavior: Clip.antiAliasWithSaveLayer,
+      //               child: InkWell(
+      //                 splashColor: Colors.red.withAlpha(30),
+      //                 onTap: () => {},
+      //                 child: Container(
+      //                   child: Column(
+      //                     children: [
+      //                       const ListTile(
+      //                         leading: Icon(Icons.restaurant),
+      //                         title: Text('Restaurante #2'),
+      //                         subtitle:
+      //                             Text('Calle primera #12, sector, ciudad'),
+      //                       )
+      //                     ],
+      //                   ),
+      //                 ),
+      //               ))),
+      //       Container(
+      //           width: 300,
+      //           margin: EdgeInsets.all(10),
+      //           child: Card(
+      //               semanticContainer: true,
+      //               clipBehavior: Clip.antiAliasWithSaveLayer,
+      //               child: InkWell(
+      //                 splashColor: Colors.red.withAlpha(30),
+      //                 onTap: () => {},
+      //                 child: Container(
+      //                   child: Column(
+      //                     children: [
+      //                       const ListTile(
+      //                         leading: Icon(Icons.restaurant),
+      //                         title: Text('Restaurante #3'),
+      //                         subtitle:
+      //                             Text('Calle primera #12, sector, ciudad'),
+      //                       )
+      //                     ],
+      //                   ),
+      //                 ),
+      //               ))),
+      //       Container(
+      //           width: 300,
+      //           margin: EdgeInsets.all(10),
+      //           child: Card(
+      //               semanticContainer: true,
+      //               clipBehavior: Clip.antiAliasWithSaveLayer,
+      //               child: InkWell(
+      //                 splashColor: Colors.red.withAlpha(30),
+      //                 onTap: () => {},
+      //                 child: Container(
+      //                   child: Column(
+      //                     children: [
+      //                       const ListTile(
+      //                         leading: Icon(Icons.restaurant),
+      //                         title: Text('Restaurante #4'),
+      //                         subtitle:
+      //                             Text('Calle primera #12, sector, ciudad'),
+      //                       )
+      //                     ],
+      //                   ),
+      //                 ),
+      //               ))),
+      //     ],
+      //   ),
       // ),
+      bottomNavigationBar: _customBottomNavigationBar(),
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text('Orden Nueva'),
+        icon: Icon(Icons.add),
+        onPressed: () => {},
+      ),
       drawer: Drawer(
           child: ListView(
         padding: EdgeInsets.zero,
@@ -218,7 +189,7 @@ class _HomePageState extends State<HomePage> {
           ListTile(
             leading: Icon(Icons.qr_code),
             title: Text('Codigo Referido'),
-            onTap: () => {},
+            onTap: _scanQr,
           ),
           Divider(),
           ListTile(
@@ -231,6 +202,37 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       )),
+    );
+  }
+
+  Widget _loadPage(int currentPage) {
+    switch (currentPage) {
+      case 0:
+        return DashboardPage();
+      case 1:
+        return MyOrderPage();
+      case 2:
+        return UserProfilePage();
+
+      default:
+        return DashboardPage();
+    }
+  }
+
+  Widget _customBottomNavigationBar() {
+    return BottomNavigationBar(
+      currentIndex: currentIndex,
+      onTap: (index) {
+        setState(() {
+          currentIndex = index;
+        });
+      },
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart), label: 'Mis Pedidos'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Mi Perfil'),
+      ],
     );
   }
 }
