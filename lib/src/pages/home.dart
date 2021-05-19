@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:new_filopp/src/models/Restaurant.dart';
 import 'package:new_filopp/src/pages/category.dart';
 import 'package:new_filopp/src/pages/login.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
 // import 'package:new_filopp/src/controllers/HomeController.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,8 +23,24 @@ class _HomePageState extends State<HomePage> {
   //   _homeController = controller;
   // }
 
+  // final String apiUrl = "https://randomuser.me/api/?results=10";
+  // Future<List<dynamic>> fetchUsers() async {
+  //   var result = await http.get(apiUrl);
+  //   return json.decode(result.body)['results'];
+  // }
+
+  // Future<http.Response> getContries() async {
+  //   // var response = await Dio().get('https://restcountries.eu/rest/v2/all');
+  //   // return http.get(Uri.https('jsonplaceholder.typicode.com', 'albums/1'));
+  //   return http.get(Uri.https('jsonplaceholder.typicode.com', 'albums/1'));
+  //   // print(response.data.length);
+
+  //   List<Restaurant> restaurants = [];
+  // }
+
   @override
   Widget build(BuildContext context) {
+    // getContries();
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: false,
@@ -28,9 +48,13 @@ class _HomePageState extends State<HomePage> {
         // elevation: 0,
         centerTitle: true,
         title: Text('Inicio'),
-        // actions: <Widget>[
-        //   new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
-        // ],
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            tooltip: 'Notificaciones',
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Container(
         height: 150,
@@ -128,6 +152,36 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      // body: FutureBuilder<List<dynamic>>(
+      //   future: fetchUsers(),
+      //   builder: (BuildContext context, AsyncSnapshot snapshot) {
+      //     if (snapshot.hasData) {
+      //       print(snapshot.data[0]);
+      //       return ListView.builder(
+      //           padding: EdgeInsets.all(8),
+      //           itemCount: snapshot.data.length,
+      //           itemBuilder: (BuildContext context, int index) {
+      //             return Card(
+      //               child: Column(
+      //                 children: <Widget>[
+      //                   ListTile(
+      //                     leading: CircleAvatar(
+      //                         radius: 30,
+      //                         backgroundImage: NetworkImage(
+      //                             snapshot.data[index]['picture']['large'])),
+      //                     title: Text(snapshot.data[index]),
+      //                     subtitle: Text(snapshot.data[index]),
+      //                     trailing: Text(snapshot.data[index]),
+      //                   )
+      //                 ],
+      //               ),
+      //             );
+      //           });
+      //     } else {
+      //       return Center(child: CircularProgressIndicator());
+      //     }
+      //   },
+      // ),
       drawer: Drawer(
           child: ListView(
         padding: EdgeInsets.zero,
