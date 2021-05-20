@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:new_filopp/src/models/Restaurant.dart';
 import 'package:new_filopp/src/pages/category.dart';
 import 'package:new_filopp/src/pages/dashboard.dart';
+import 'package:new_filopp/src/pages/history.dart';
 import 'package:new_filopp/src/pages/login.dart';
-import 'package:http/http.dart' as http;
 import 'package:new_filopp/src/pages/my_order.dart';
+import 'package:new_filopp/src/pages/restaurant.dart';
 import 'package:new_filopp/src/pages/user_profile.dart';
-import 'dart:async';
-import 'dart:convert';
 import 'package:qrcode_reader/qrcode_reader.dart';
 
 class HomePage extends StatefulWidget {
@@ -44,112 +42,21 @@ class _HomePageState extends State<HomePage> {
         title: Text('Inicio'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.search),
+            tooltip: 'Buscar...',
+            onPressed: () {},
+          ),
+          IconButton(
             icon: const Icon(Icons.notifications),
             tooltip: 'Notificaciones',
             onPressed: () {},
-          ),
+          )
         ],
       ),
       body: _loadPage(currentIndex),
-      // body: Container(
-      //   height: 150,
-      //   child: ListView(
-      //     scrollDirection: Axis.horizontal,
-      //     children: [
-      //       Container(
-      //           width: 300,
-      //           margin: EdgeInsets.all(10),
-      //           child: Card(
-      //               semanticContainer: true,
-      //               clipBehavior: Clip.antiAliasWithSaveLayer,
-      //               child: InkWell(
-      //                 splashColor: Colors.red.withAlpha(30),
-      //                 onTap: () => {},
-      //                 child: Container(
-      //                   child: Column(
-      //                     children: [
-      //                       const ListTile(
-      //                         leading: Icon(Icons.restaurant),
-      //                         title: Text('Restaurante #1'),
-      //                         subtitle:
-      //                             Text('Calle primera #12, sector, ciudad'),
-      //                       )
-      //                     ],
-      //                   ),
-      //                 ),
-      //               ))),
-      //       Container(
-      //           width: 300,
-      //           margin: EdgeInsets.all(10),
-      //           child: Card(
-      //               semanticContainer: true,
-      //               clipBehavior: Clip.antiAliasWithSaveLayer,
-      //               child: InkWell(
-      //                 splashColor: Colors.red.withAlpha(30),
-      //                 onTap: () => {},
-      //                 child: Container(
-      //                   child: Column(
-      //                     children: [
-      //                       const ListTile(
-      //                         leading: Icon(Icons.restaurant),
-      //                         title: Text('Restaurante #2'),
-      //                         subtitle:
-      //                             Text('Calle primera #12, sector, ciudad'),
-      //                       )
-      //                     ],
-      //                   ),
-      //                 ),
-      //               ))),
-      //       Container(
-      //           width: 300,
-      //           margin: EdgeInsets.all(10),
-      //           child: Card(
-      //               semanticContainer: true,
-      //               clipBehavior: Clip.antiAliasWithSaveLayer,
-      //               child: InkWell(
-      //                 splashColor: Colors.red.withAlpha(30),
-      //                 onTap: () => {},
-      //                 child: Container(
-      //                   child: Column(
-      //                     children: [
-      //                       const ListTile(
-      //                         leading: Icon(Icons.restaurant),
-      //                         title: Text('Restaurante #3'),
-      //                         subtitle:
-      //                             Text('Calle primera #12, sector, ciudad'),
-      //                       )
-      //                     ],
-      //                   ),
-      //                 ),
-      //               ))),
-      //       Container(
-      //           width: 300,
-      //           margin: EdgeInsets.all(10),
-      //           child: Card(
-      //               semanticContainer: true,
-      //               clipBehavior: Clip.antiAliasWithSaveLayer,
-      //               child: InkWell(
-      //                 splashColor: Colors.red.withAlpha(30),
-      //                 onTap: () => {},
-      //                 child: Container(
-      //                   child: Column(
-      //                     children: [
-      //                       const ListTile(
-      //                         leading: Icon(Icons.restaurant),
-      //                         title: Text('Restaurante #4'),
-      //                         subtitle:
-      //                             Text('Calle primera #12, sector, ciudad'),
-      //                       )
-      //                     ],
-      //                   ),
-      //                 ),
-      //               ))),
-      //     ],
-      //   ),
-      // ),
       bottomNavigationBar: _customBottomNavigationBar(),
       floatingActionButton: FloatingActionButton.extended(
-        label: Text('Orden Nueva'),
+        label: Text('Nueva Orden'),
         icon: Icon(Icons.add),
         onPressed: () => {},
       ),
@@ -177,6 +84,15 @@ class _HomePageState extends State<HomePage> {
           ListTile(
             leading: Icon(Icons.restaurant),
             title: Text('Restaurantes'),
+            onTap: () => {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RestaurantPage()))
+            },
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.access_time),
+            title: Text('Historial'),
             onTap: () => {},
           ),
           Divider(),
@@ -190,6 +106,11 @@ class _HomePageState extends State<HomePage> {
             leading: Icon(Icons.qr_code),
             title: Text('Codigo Referido'),
             onTap: _scanQr,
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Ajustes'),
+            onTap: () => {},
           ),
           Divider(),
           ListTile(
@@ -231,7 +152,7 @@ class _HomePageState extends State<HomePage> {
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
         BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart), label: 'Mis Pedidos'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Mi Perfil'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Mi Perfil')
       ],
     );
   }
