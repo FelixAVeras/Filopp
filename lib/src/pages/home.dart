@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:new_filopp/src/helpers/search_delegate.dart';
 import 'package:new_filopp/src/pages/category.dart';
 import 'package:new_filopp/src/pages/dashboard.dart';
-import 'package:new_filopp/src/pages/history.dart';
 import 'package:new_filopp/src/pages/login.dart';
 import 'package:new_filopp/src/pages/my_order.dart';
+import 'package:new_filopp/src/pages/product.dart';
 import 'package:new_filopp/src/pages/restaurant.dart';
 import 'package:new_filopp/src/pages/user_profile.dart';
 import 'package:qrcode_reader/qrcode_reader.dart';
@@ -32,6 +33,8 @@ class _HomePageState extends State<HomePage> {
     if (futureString != null) {
       print('Tenemos informacion');
     }
+
+    print('scanner: $futureString');
   }
 
   @override
@@ -42,23 +45,38 @@ class _HomePageState extends State<HomePage> {
         title: Text('Inicio'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
-            tooltip: 'Buscar...',
-            onPressed: () {},
-          ),
-          IconButton(
             icon: const Icon(Icons.notifications),
             tooltip: 'Notificaciones',
             onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.search),
+            tooltip: 'Buscar',
+            onPressed: () {
+              showSearch(context: context, delegate: DataSearch());
+            },
           )
         ],
       ),
       body: _loadPage(currentIndex),
       bottomNavigationBar: _customBottomNavigationBar(),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: const <BottomNavigationBarItem>[
+      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.shopping_cart), label: 'Mis Pedidos'),
+      //     BottomNavigationBarItem(
+      //         icon: Icon(Icons.favorite), label: 'Mis Favoritos'),
+      //     BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Mi Perfil')
+      //   ],
+      // ),
       floatingActionButton: FloatingActionButton.extended(
         label: Text('Nueva Orden'),
         icon: Icon(Icons.add),
-        onPressed: () => {},
+        onPressed: () => {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ProductPage()))
+        },
       ),
       drawer: Drawer(
           child: ListView(
@@ -107,6 +125,7 @@ class _HomePageState extends State<HomePage> {
             title: Text('Codigo Referido'),
             onTap: _scanQr,
           ),
+          Divider(),
           ListTile(
             leading: Icon(Icons.settings),
             title: Text('Ajustes'),

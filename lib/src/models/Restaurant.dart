@@ -28,3 +28,19 @@ class Restaurant {
         "restaurantMenu": List<dynamic>.from(restaurantMenu.map((x) => x)),
       };
 }
+
+class Restaurants {
+  List<Restaurant> items = new List();
+  Restaurants();
+
+  Restaurants.fromJsonList(List<dynamic> jsonList) {
+    if (jsonList == null) {
+      return;
+    }
+
+    for (var item in jsonList) {
+      final restaurant = new Restaurant.fromJson(item);
+      items.add(restaurant);
+    }
+  }
+}
