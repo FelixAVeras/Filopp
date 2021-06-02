@@ -20,16 +20,21 @@ class _productPageState extends State<ProductPage> {
       ),
       body: FutureBuilder(
           future: httpService.getAllProducts(),
-          builder:
-              (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
+          builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
             if (snapshot.hasData) {
-              List<Product> products = snapshot.data;
+              List products = snapshot.data;
 
-              return ListView(
-                children: products
-                    .map((Product product) =>
-                        ListTile(title: Text(product.productName)))
-                    .toList(),
+              return ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  Map product = products[index] as Map;
+                  return Card(
+                    child: ListTile(
+                      title: Text(product['title']['rendered']),
+                      subtitle: Text(product['content']['rendered']),
+                    ),
+                  );
+                },
               );
             }
             return Center(child: CircularProgressIndicator());

@@ -1,26 +1,18 @@
 import 'dart:convert';
 import 'dart:async';
 
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:new_filopp/src/models/Product.dart';
 
 class HttpService {
-  // final String baseUrl = 'https://test.mimapi.club/wp-json/wp/v2';
-  // final String apiUrlForProducts = '/product';
+  final String baseUrl = 'https://test.mimapi.club/wp-json/wp/v2';
 
-  final String testApiUrl = 'https://jsonplaceholder.typicode.com/photos';
+  Future<List> getAllProducts() async {
+    final resp = await http
+        .get(baseUrl + '/product', headers: {'Accept': 'application/json'});
 
-  Future<List<Product>> getAllProducts() async {
-    // Response resp = await get(baseUrl + apiUrlForProducts);
-    Response resp = await get(testApiUrl);
+    var convertToJson = jsonDecode(resp.body);
 
-    if (resp.statusCode == 200) {
-      List<dynamic> body = jsonDecode(resp.body);
-
-      List<Product> products =
-          body.map((dynamic item) => Product.fromJson(item)).toList();
-
-      return products;
-    }
+    return convertToJson;
   }
 }
