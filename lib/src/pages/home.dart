@@ -6,8 +6,6 @@ import 'package:new_filopp/src/pages/login.dart';
 import 'package:new_filopp/src/pages/my_order.dart';
 import 'package:new_filopp/src/pages/product.dart';
 import 'package:new_filopp/src/pages/restaurant.dart';
-import 'package:new_filopp/src/pages/user_profile.dart';
-import 'package:qrcode_reader/qrcode_reader.dart';
 
 class HomePage extends StatefulWidget {
   final GlobalKey<ScaffoldState> parentScaffoldKey;
@@ -20,22 +18,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
-
-  _scanQr() async {
-    String futureString = '';
-
-    try {
-      futureString = await new QRCodeReader().scan();
-    } catch (e) {
-      futureString = e.toString();
-    }
-
-    if (futureString != null) {
-      print('Tenemos informacion');
-    }
-
-    print('scanner: $futureString');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,16 +42,6 @@ class _HomePageState extends State<HomePage> {
       ),
       body: _loadPage(currentIndex),
       bottomNavigationBar: _customBottomNavigationBar(),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: const <BottomNavigationBarItem>[
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.shopping_cart), label: 'Mis Pedidos'),
-      //     BottomNavigationBarItem(
-      //         icon: Icon(Icons.favorite), label: 'Mis Favoritos'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Mi Perfil')
-      //   ],
-      // ),
       floatingActionButton: FloatingActionButton.extended(
         label: Text('Nueva Orden'),
         icon: Icon(Icons.add),
@@ -121,24 +93,9 @@ class _HomePageState extends State<HomePage> {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.qr_code),
-            title: Text('Codigo Referido'),
-            onTap: _scanQr,
-          ),
-          Divider(),
-          ListTile(
             leading: Icon(Icons.settings),
             title: Text('Ajustes'),
             onTap: () => {},
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Productos (Prueba)'),
-            onTap: () => {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProductPage()))
-            },
           ),
           Divider(),
           ListTile(
@@ -160,8 +117,6 @@ class _HomePageState extends State<HomePage> {
         return DashboardPage();
       case 1:
         return MyOrderPage();
-      case 2:
-        return UserProfilePage();
 
       default:
         return DashboardPage();
@@ -180,7 +135,6 @@ class _HomePageState extends State<HomePage> {
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),
         BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart), label: 'Mis Pedidos'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Mi Perfil')
       ],
     );
   }
