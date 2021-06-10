@@ -192,8 +192,8 @@ class RegisterPage extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
           gradient: LinearGradient(colors: <Color>[
-        Color.fromRGBO(26, 188, 156, 1.0),
-        Color.fromRGBO(26, 188, 156, 1.0)
+        Color.fromRGBO(200, 20, 20, 1.0),
+        Color.fromRGBO(255, 26, 26, 1.0)
       ])),
     );
 

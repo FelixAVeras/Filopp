@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:new_filopp/src/helpers/http_services.dart';
+// import 'package:new_filopp/src/helpers/http_services.dart';
 import 'package:new_filopp/src/pages/home.dart';
-// import 'package:personalmoney/bloc/provider.dart';
+import 'package:new_filopp/src/pages/register.dart';
+// // // import 'package:personalmoney/bloc/provider.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -14,6 +17,9 @@ class LoginPage extends StatelessWidget {
   Widget _loginForm(BuildContext context) {
     final size = MediaQuery.of(context).size;
     // final bloc = CustomProvider.of(context);
+
+    bool isApiCallProcess = false;
+    HttpService httpService;
 
     return SingleChildScrollView(
       child: Column(
@@ -65,8 +71,8 @@ class LoginPage extends StatelessWidget {
               child: OutlineButton(
                 color: Colors.white,
                 onPressed: () => {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => RegisterPage()))
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => RegisterPage()))
                 },
                 child: Text(
                   'Registrar Usuario',
@@ -98,7 +104,14 @@ class LoginPage extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: TextField(
+        child: TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Este campo no puede estar vacio.';
+            }
+
+            return null;
+          },
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
               icon: Icon(
@@ -121,7 +134,14 @@ class LoginPage extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: TextField(
+        child: TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Este campo no puede estar vacio.';
+            }
+
+            return null;
+          },
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
           decoration: InputDecoration(
@@ -186,3 +206,66 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+
+// class LoginPage extends StatefulWidget {
+//   @override
+//   _loginPageState createState() => _loginPageState();
+// }
+
+// // ignore: camel_case_types
+// class _loginPageState extends State<LoginPage> {
+//   final _formKey = GlobalKey<FormState>();
+
+//   bool isApiCallProcess = false;
+//   HttpService httpService;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         body: Column(
+//       children: [
+//         Container(
+//           child: Image.asset('assets/filopp_logo.png'),
+//         ),
+//         SizedBox(height: 30.0),
+//         Form(
+//           child: Column(
+//             children: <Widget>[
+//               TextFormField(
+//                 keyboardType: TextInputType.emailAddress,
+//                 decoration: InputDecoration(
+//                   border: OutlineInputBorder(),
+//                   labelText: 'Nombre de usuario',
+//                 ),
+//                 validator: (value) {
+//                   if (value == null || value.isEmpty) {
+//                     return 'Please enter some text';
+//                   }
+//                   return null;
+//                 },
+//               ),
+//               SizedBox(height: 40.0),
+//               TextFormField(
+//                 obscureText: true,
+//                 decoration: InputDecoration(
+//                   border: OutlineInputBorder(),
+//                   labelText: 'Contraseña',
+//                 ),
+//                 validator: (value) {
+//                   if (value == null || value.isEmpty) {
+//                     return 'Please enter some text';
+//                   }
+//                   return null;
+//                 },
+//               ),
+//               ElevatedButton(
+//                 onPressed: () {},
+//                 child: Text('Iniciar Sesion'),
+//               ),
+//             ],
+//           ),
+//         )
+//       ],
+//     ));
+//   }
+// }
