@@ -36,15 +36,23 @@ class Data {
   String token;
   int id;
   String email;
+  String username;
   String firstname;
   String lastname;
 
-  Data({this.token, this.id, this.email, this.firstname, this.lastname});
+  Data(
+      {this.token,
+      this.id,
+      this.email,
+      this.username,
+      this.firstname,
+      this.lastname});
 
   Data.fromJson(Map<String, dynamic> json) {
     token = json['token'];
     id = json['id'];
     email = json['email'];
+    username = json['username'];
     firstname = json['firstname'];
     lastname = json['lastname'];
   }
@@ -55,6 +63,7 @@ class Data {
     data['token'] = this.token;
     data['id'] = this.id;
     data['email'] = this.email;
+    data['username'] = this.username;
     data['firstname'] = this.firstname;
     data['lastname'] = this.lastname;
 

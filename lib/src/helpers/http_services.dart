@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 
-import 'package:dio/dio.dart';
+// import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 import 'package:new_filopp/src/helpers/config.dart';
 import 'package:new_filopp/src/models/Customer.dart';
 import 'package:new_filopp/src/models/LoginResponse.dart';
@@ -11,52 +12,62 @@ class HttpService {
   // final String baseUrl = 'https://test.mimapi.club/wp-json/wp/v2';
   // final String baseUrl = 'https://mimapi.club/wp-json/wcfmmp/v1';
 
-  Future<bool> createCustomer(Customer model) async {
-    var authToken =
-        base64.encode(utf8.encode(Config.key + ":" + Config.secret));
+  // Future<bool> createCustomer(Customer model) async {
+  //   var authToken =
+  //       base64.encode(utf8.encode(Config.key + ":" + Config.secret));
 
-    bool ret = false;
+  //   bool ret = false;
 
-    try {
-      var response = await Dio().post(Config.url + Config.customerUrl,
-          data: model.toJson(),
-          options: new Options(headers: {
-            HttpHeaders.authorizationHeader: 'Basic $authToken',
-            HttpHeaders.contentTypeHeader: 'application/json'
-          }));
+  //   try {
+  //     var response = await Dio().post(Config.url + Config.customerUrl,
+  //         data: model.toJson(),
+  //         options: new Options(headers: {
+  //           HttpHeaders.authorizationHeader: 'Basic $authToken',
+  //           HttpHeaders.contentTypeHeader: 'application/json'
+  //         }));
 
-      if (response.statusCode == 201) {
-        ret = true;
-      }
-    } on DioError catch (e) {
-      if (e.response.statusCode == 404) {
-        ret = false;
-      } else {
-        ret = false;
-      }
-    }
+  //     if (response.statusCode == 201) {
+  //       ret = true;
+  //     }
+  //   } on DioError catch (e) {
+  //     if (e.response.statusCode == 404) {
+  //       ret = false;
+  //     } else {
+  //       ret = false;
+  //     }
+  //   }
 
-    return ret;
-  }
+  //   return ret;
+  // }
 
-  Future<LoginResponse> LoginUser(String username, String password) async {
-    LoginResponse model;
+  // Future<LoginResponse> LoginUser(String username, String password) async {
+  //   LoginResponse model;
 
-    try {
-      var response = await Dio().post(Config.tokenUrl,
-          data: {'username': username, 'password': password},
-          options: new Options(headers: {
-            HttpHeaders.contentTypeHeader: 'application/x-www-form-urlencoded'
-          }));
+  //   try {
+  //     var response = await Dio().post(Config.tokenUrl,
+  //         data: {'username': username, 'password': password},
+  //         options: new Options(headers: {
+  //           HttpHeaders.contentTypeHeader: 'application/x-www-form-urlencoded'
+  //         }));
 
-      if (response.statusCode == 200) {
-        model = LoginResponse.fromJson(response.data);
-      }
-    } on DioError catch (e) {
-      print(e.message);
-    }
+  //     if (response.statusCode == 200) {
+  //       model = LoginResponse.fromJson(response.data);
+  //     }
+  //   } on DioError catch (e) {
+  //     print(e.message);
+  //   }
 
-    return model;
+  //   return model;
+  // }
+
+  Future<http.Response> LoginUser(String username, String password) async {
+    final http.Response response = await http.post(
+        'https://mimapi.club/wp-json/jwt-auth/v1/token?username=$username&password=$password');
+
+    print('Resultado: ');
+    print(response);
+
+    return response;
   }
 
   // Future<List> getAllRestaurants() async {
@@ -88,5 +99,5 @@ class HttpService {
   //   return convertToJson;
   // }
 
-  Future<List> getAllProducts() async {}
+  // Future<List> getAllProducts() async {}
 }
