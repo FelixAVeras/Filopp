@@ -2,42 +2,49 @@ import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 
-// import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 import 'package:new_filopp/src/helpers/config.dart';
 import 'package:new_filopp/src/models/Customer.dart';
 import 'package:new_filopp/src/models/LoginResponse.dart';
 
-class HttpService {
+import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_wordpress/flutter_wordpress.dart' as wp;
+
+class APIHttpService {
   // final String baseUrl = 'https://test.mimapi.club/wp-json/wp/v2';
   // final String baseUrl = 'https://mimapi.club/wp-json/wcfmmp/v1';
 
-  // Future<bool> createCustomer(Customer model) async {
-  //   var authToken =
-  //       base64.encode(utf8.encode(Config.key + ":" + Config.secret));
+  // wp.WordPress wordPress;
+  
+  // wordPress = wp.WordPress(
+  //   baseUrl: 'https://mimapi.club/wp-json/wcfmmp/v1',
+  //   authenticator: wp.WordPressAuthenticator.JWT,
+  //   adminName: '',
+  //   adminKey: '',
+  // );
 
-  //   bool ret = false;
+  // Future<wp.User> response =
+  //     wordPress.authenticateUser(username: 'admint', password: 'Colombia2020!');
 
-  //   try {
-  //     var response = await Dio().post(Config.url + Config.customerUrl,
-  //         data: model.toJson(),
-  //         options: new Options(headers: {
-  //           HttpHeaders.authorizationHeader: 'Basic $authToken',
-  //           HttpHeaders.contentTypeHeader: 'application/json'
-  //         }));
+  // static var client = http.Client();
+  // static String baseUrl = 'https://mimapi.club/wp-json/wcfmmp/v1';
 
-  //     if (response.statusCode == 201) {
-  //       ret = true;
-  //     }
-  //   } on DioError catch (e) {
-  //     if (e.response.statusCode == 404) {
-  //       ret = false;
-  //     } else {
-  //       ret = false;
-  //     }
+  // Future<bool> loginUser(String username, String password) async {
+  //   Map<String, dynamic> requestHeader = {
+  //     'Content-type': 'application/x-www-form-urlencoded'
+  //   };
+
+  //   var responsetoken = await client.post('$baseUrl/wp-json/jwt-auth/v1/token',
+  //       headers: requestHeader,
+  //       body: {'username': username, 'password': password});
+  
+  //   if (responsetoken.statusCode == 200) {
+  //     var jsonString = responsetoken.body;
+
+  //     LoginResponse loginResponse = LoginResponse.fromJson(jsonString);
+
+  //     return loginResponse.statusCode == 200 ? true : false;
   //   }
-
-  //   return ret;
   // }
 
   // Future<LoginResponse> LoginUser(String username, String password) async {
@@ -52,6 +59,10 @@ class HttpService {
 
   //     if (response.statusCode == 200) {
   //       model = LoginResponse.fromJson(response.data);
+
+  //       print('Resultado: ');
+  //       print(response);
+  //       print(model);
   //     }
   //   } on DioError catch (e) {
   //     print(e.message);
@@ -60,15 +71,15 @@ class HttpService {
   //   return model;
   // }
 
-  Future<http.Response> LoginUser(String username, String password) async {
-    final http.Response response = await http.post(
-        'https://mimapi.club/wp-json/jwt-auth/v1/token?username=$username&password=$password');
+  // Future<http.Response> LoginUser(String username, String password) async {
+  //   final http.Response response = await http.post(
+  //       'https://app.biciaccesorios.online/wp-json/jwt-auth/v1/token?username=$username&password=$password');
 
-    print('Resultado: ');
-    print(response);
+  //   print('Resultado: ');
+  //   print(response);
 
-    return response;
-  }
+  //   return response;
+  // }
 
   // Future<List> getAllRestaurants() async {
   //   final resp = await http

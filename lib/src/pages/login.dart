@@ -15,14 +15,14 @@ class _loginPageState extends State<LoginPage> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isApiCallProcess = false;
   bool hidePassword = true;
-  HttpService httpService;
+  APIHttpService httpService;
 
   String username;
   String password;
 
   @override
   void initState() {
-    httpService = new HttpService();
+    httpService = new APIHttpService();
     super.initState();
   }
 
@@ -103,26 +103,32 @@ class _loginPageState extends State<LoginPage> {
                                     borderRadius: BorderRadius.circular(5.0)),
                                 onPressed: () {
                                   if (validatedForm()) {
-                                    // httpService.LoginUser(username, password);
+                                    // httpService.loginUser(username, password);
+
                                     print('usuario: ${this.username}');
                                     print('Contraseña: ${this.password}');
 
-                                    showDialog<String>(
-                                        context: context,
-                                        builder: (BuildContext context) =>
-                                            AlertDialog(
-                                              title: const Text('Filopp'),
-                                              content: Text(
-                                                  '${this.username}, Entraste'),
-                                              actions: [
-                                                TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            context, 'OK'),
-                                                    child:
-                                                        const Text('Aceptar'))
-                                              ],
-                                            ));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => HomePage()));
+
+                                    // showDialog<String>(
+                                    //     context: context,
+                                    //     builder: (BuildContext context) =>
+                                    //         AlertDialog(
+                                    //           title: const Text('Filopp'),
+                                    //           content: Text(
+                                    //               '${this.username}, Entraste'),
+                                    //           actions: [
+                                    //             TextButton(
+                                    //                 onPressed: () =>
+                                    //                     Navigator.pop(
+                                    //                         context, 'OK'),
+                                    //                 child:
+                                    //                     const Text('Aceptar'))
+                                    //           ],
+                                    //         ));
                                   }
                                 },
                                 color: Colors.red,

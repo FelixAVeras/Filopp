@@ -42,14 +42,14 @@ class _HomePageState extends State<HomePage> {
       ),
       body: _loadPage(currentIndex),
       bottomNavigationBar: _customBottomNavigationBar(),
-      floatingActionButton: FloatingActionButton.extended(
-        label: Text('Nueva Orden'),
-        icon: Icon(Icons.add),
-        onPressed: () => {
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (context) => ProductPage()))
-        },
-      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   label: Text('Nueva Orden'),
+      //   icon: Icon(Icons.add),
+      //   onPressed: () => {
+      //     // Navigator.push(
+      //     //     context, MaterialPageRoute(builder: (context) => ProductPage()))
+      //   },
+      // ),
       drawer: Drawer(
           child: ListView(
         padding: EdgeInsets.zero,
