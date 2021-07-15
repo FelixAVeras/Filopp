@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_filopp/src/pages/category_detail.dart';
+import 'package:new_filopp/src/pages/restaurant_detail.dart';
 
 class DashboardPage extends StatelessWidget {
   @override
@@ -63,7 +63,7 @@ class DashboardPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CategoryDetail()))
+                              builder: (context) => RestaurantDetail()))
                     }),
           ),
           Card(
@@ -76,7 +76,7 @@ class DashboardPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CategoryDetail()))
+                              builder: (context) => RestaurantDetail()))
                     }),
           ),
           Card(
@@ -89,7 +89,7 @@ class DashboardPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CategoryDetail()))
+                              builder: (context) => RestaurantDetail()))
                     }),
           ),
           Card(
@@ -102,7 +102,7 @@ class DashboardPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CategoryDetail()))
+                              builder: (context) => RestaurantDetail()))
                     }),
           ),
           Card(
@@ -115,7 +115,7 @@ class DashboardPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CategoryDetail()))
+                              builder: (context) => RestaurantDetail()))
                     }),
           ),
           Card(
@@ -128,7 +128,7 @@ class DashboardPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CategoryDetail()))
+                              builder: (context) => RestaurantDetail()))
                     }),
           ),
           Card(
@@ -141,7 +141,7 @@ class DashboardPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CategoryDetail()))
+                              builder: (context) => RestaurantDetail()))
                     }),
           ),
           Card(
@@ -154,7 +154,7 @@ class DashboardPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CategoryDetail()))
+                              builder: (context) => RestaurantDetail()))
                     }),
           ),
         ],

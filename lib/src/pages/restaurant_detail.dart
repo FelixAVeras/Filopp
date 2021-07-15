@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 final Color red = Colors.red;
 
-class CategoryDetail extends StatelessWidget {
+class RestaurantDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

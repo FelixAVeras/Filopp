@@ -16,14 +16,14 @@ class _registerPageState extends State<RegisterPage> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isApiCallProcess = false;
   bool hidePassword = true;
-  APIHttpService httpService;
+  // APIHttpService httpService;
 
   String username;
   String password;
 
   @override
   void initState() {
-    httpService = new APIHttpService();
+    // httpService = new APIHttpService();
     super.initState();
   }
 
