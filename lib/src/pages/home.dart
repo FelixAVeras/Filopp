@@ -72,6 +72,15 @@ class _HomePageState extends State<HomePage> {
           ),
           Divider(),
           ListTile(
+            leading: Icon(Icons.restaurant_menu),
+            title: Text('Platos'),
+            onTap: () => {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProductPage()))
+            },
+          ),
+          Divider(),
+          ListTile(
             leading: Icon(Icons.restaurant),
             title: Text('Restaurantes'),
             onTap: () => {

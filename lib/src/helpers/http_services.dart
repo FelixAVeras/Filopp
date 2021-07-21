@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:async';
 import 'package:http/http.dart' as http;
 
 final String baseUrlV3 = 'https://mimapi.club/wp-json/wc/v3/';
@@ -10,7 +11,7 @@ final String consumerSecret =
 
 Future<List> getCategories() async {
   final categoryResponse = await http.get(
-      baseUrlV3 + 'products/categories?$consumerKey&$consumerSecret',
+      Uri.parse(baseUrlV3 + 'products/categories?$consumerKey&$consumerSecret'),
       headers: {"Accept": "application/json"});
 
   var categoryJson = jsonDecode(categoryResponse.body);
@@ -20,7 +21,7 @@ Future<List> getCategories() async {
 
 Future<List> getProducts() async {
   final productResponse = await http.get(
-      baseUrlV3 + 'products?$consumerKey&$consumerSecret',
+      Uri.parse(baseUrlV3 + 'products?$consumerKey&$consumerSecret'),
       headers: {"Accept": "application/json"});
 
   var productJson = jsonDecode(productResponse.body);

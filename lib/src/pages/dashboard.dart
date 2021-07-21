@@ -55,8 +55,6 @@ class DashboardPage extends StatelessWidget {
           Text('Restaurantes Trending', style: TextStyle(fontSize: 18)),
           Card(
             child: ListTile(
-                leading: Image.network(
-                    'https://test.mimapi.club/wp-content/uploads/2020/04/IMG_20200404_133331-1.jpg'),
                 title: Text('Mr. Burger Tulua'),
                 subtitle: Text('this is a description of this restaurant'),
                 onTap: () => {
@@ -68,8 +66,6 @@ class DashboardPage extends StatelessWidget {
           ),
           Card(
             child: ListTile(
-                leading: Image.network(
-                    'https://test.mimapi.club/wp-content/uploads/2020/04/ohannasushi-1.jpg'),
                 title: Text('Ohana Sushi Bowl'),
                 subtitle: Text('this is a description of this restaurant'),
                 onTap: () => {
@@ -81,8 +77,6 @@ class DashboardPage extends StatelessWidget {
           ),
           Card(
             child: ListTile(
-                leading: Image.network(
-                    'https://test.mimapi.club/wp-content/uploads/2020/05/conodeplatano.jpg'),
                 title: Text('La Tostonera'),
                 subtitle: Text('this is a description of this restaurant'),
                 onTap: () => {
@@ -94,8 +88,6 @@ class DashboardPage extends StatelessWidget {
           ),
           Card(
             child: ListTile(
-                leading: Image.network(
-                    'https://test.mimapi.club/wp-content/uploads/2020/04/logorivarolo.jpg'),
                 title: Text('Restaurante Rivarolo'),
                 subtitle: Text('this is a description of this restaurant'),
                 onTap: () => {
@@ -107,8 +99,6 @@ class DashboardPage extends StatelessWidget {
           ),
           Card(
             child: ListTile(
-                leading: Image.network(
-                    'https://test.mimapi.club/wp-content/uploads/2021/01/logovenecia.jpg'),
                 title: Text('Pizzeria Venecia'),
                 subtitle: Text('this is a description of this restaurant'),
                 onTap: () => {
@@ -120,8 +110,6 @@ class DashboardPage extends StatelessWidget {
           ),
           Card(
             child: ListTile(
-                leading: Image.network(
-                    'https://test.mimapi.club/wp-content/uploads/2021/01/logowasabi.jpg'),
                 title: Text('Wasabi Sushi Bar'),
                 subtitle: Text('this is a description of this restaurant'),
                 onTap: () => {
@@ -133,8 +121,6 @@ class DashboardPage extends StatelessWidget {
           ),
           Card(
             child: ListTile(
-                leading: Image.network(
-                    'https://test.mimapi.club/wp-content/uploads/2020/05/logo-5.jpg'),
                 title: Text('Grato Pecado'),
                 subtitle: Text('this is a description of this restaurant'),
                 onTap: () => {
@@ -146,8 +132,6 @@ class DashboardPage extends StatelessWidget {
           ),
           Card(
             child: ListTile(
-                leading: Image.network(
-                    'https://test.mimapi.club/wp-content/uploads/2020/05/logoalitasbbqla26.jpg'),
                 title: Text('Alitas BBQ a la 26'),
                 subtitle: Text('this is a description of this restaurant'),
                 onTap: () => {
