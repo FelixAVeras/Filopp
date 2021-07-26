@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_filopp/src/models/Product.dart';
+import 'package:new_filopp/src/pages/product_detail.dart';
 import 'package:new_filopp/src/providers/product_provider.dart';
 
 class ProductPage extends StatefulWidget {
@@ -15,7 +16,6 @@ class _productPageState extends State<ProductPage> {
         centerTitle: true,
         title: Text('Menu - Productos'),
       ),
-      // body: _loadProductList(),
       body: FutureBuilder(
         future: productList(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -27,10 +27,22 @@ class _productPageState extends State<ProductPage> {
               itemBuilder: (context, index) {
                 Map products = snapshot.data[index];
                 return Card(
-                    child: ListTile(
-                  title: Text(products['title']['rendered']),
-                  subtitle: Text(products['content']['rendered']),
-                  onTap: () => {},
+                    child: InkWell(
+                  onTap: () {
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) =>
+                    //             ProductDetailPage(products['id'])));
+                  },
+                  child: ListTile(
+                    // leading: Image.network(products['images']['src']),
+                    title: Text(products['name']),
+                    subtitle: Text(
+                      'Precio: \$' + products['price'],
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
                 ));
               },
             );
@@ -42,31 +54,3 @@ class _productPageState extends State<ProductPage> {
     );
   }
 }
-
-//   Widget _loadProductList() {
-//     final productProvider = new ProductProvider();
-//     return FutureBuilder(
-//       future: productProvider.productList(),
-//       builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
-//         if (snapshot.hasData) {
-//           final products = snapshot.data;
-
-//           return ListView.builder(
-//             itemCount: products.length,
-//             itemBuilder: (context, i) => _itemProductList(products[i]),
-//           );
-//         } else {
-//           return Center(child: CircularProgressIndicator());
-//         }
-//       },
-//     );
-//   }
-
-//   Widget _itemProductList(Product productModel) {
-//     return Card(
-//         child: ListTile(
-//       title: Text('${productModel.productName}'),
-//       onTap: () => {},
-//     ));
-//   }
-// }

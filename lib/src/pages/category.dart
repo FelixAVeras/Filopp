@@ -4,8 +4,8 @@ import 'package:new_filopp/src/models/Category.dart';
 import 'package:new_filopp/src/providers/category_provider.dart';
 
 class CategoryPage extends StatelessWidget {
-  Category categoryModel = new Category();
-  final categoryProvider = new CategoryProvider();
+  // Category categoryModel = new Category();
+  // final categoryProvider = new CategoryProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -14,32 +14,53 @@ class CategoryPage extends StatelessWidget {
           centerTitle: true,
           title: Text('Categorias'),
         ),
-        body: _loadCategoryList());
+        // body: _loadCategoryList());
+        body: FutureBuilder(
+            future: categoryList(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                var categories = snapshot.data;
+
+                return ListView.builder(
+                    itemCount: categories.length,
+                    itemBuilder: (context, index) {
+                      Map categories = snapshot.data[index];
+                      return Card(
+                        child: ListTile(
+                          title: Text(categories['name']),
+                          onTap: () => {},
+                        ),
+                      );
+                    });
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            }));
   }
 
-  Widget _loadCategoryList() {
-    return FutureBuilder(
-      future: categoryProvider.categoryList(),
-      builder: (BuildContext context, AsyncSnapshot<List<Category>> snapshot) {
-        if (snapshot.hasData) {
-          final categories = snapshot.data;
+  // Widget _loadCategoryList() {
+  //   return FutureBuilder(
+  //     future: categoryProvider.categoryList(),
+  //     builder: (BuildContext context, AsyncSnapshot<List<Category>> snapshot) {
+  //       if (snapshot.hasData) {
+  //         final categories = snapshot.data;
 
-          return ListView.builder(
-            itemCount: categories.length,
-            itemBuilder: (context, i) => _itemCategoryList(categories[i]),
-          );
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
-      },
-    );
-  }
+  //         return ListView.builder(
+  //           itemCount: categories.length,
+  //           itemBuilder: (context, i) => _itemCategoryList(categories[i]),
+  //         );
+  //       } else {
+  //         return Center(child: CircularProgressIndicator());
+  //       }
+  //     },
+  //   );
+  // }
 
-  Widget _itemCategoryList(Category categoryModel) {
-    return Card(
-        child: ListTile(
-      title: Text('${categoryModel.categoryName}'),
-      onTap: () => {},
-    ));
-  }
+  // Widget _itemCategoryList(Category categoryModel) {
+  //   return Card(
+  //       child: ListTile(
+  //     title: Text('${categoryModel.categoryName}'),
+  //     onTap: () => {},
+  //   ));
+  // }
 }
