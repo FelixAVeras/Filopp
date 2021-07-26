@@ -33,7 +33,18 @@ class CategoryPage extends StatelessWidget {
                       );
                     });
               } else {
-                return Center(child: CircularProgressIndicator());
+                // return Center(child: CircularProgressIndicator());
+                return Container(
+                    padding: EdgeInsets.all(16.0),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Text('Cargando...'),
+                          SizedBox(height: 20.0),
+                          LinearProgressIndicator()
+                        ],
+                      ),
+                    ));
               }
             }));
   }

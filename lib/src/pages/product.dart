@@ -14,7 +14,7 @@ class _productPageState extends State<ProductPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Menu - Productos'),
+        title: Text('Menu'),
       ),
       body: FutureBuilder(
         future: productList(),
@@ -24,16 +24,16 @@ class _productPageState extends State<ProductPage> {
 
             return ListView.builder(
               itemCount: products.length,
-              itemBuilder: (context, index) {
+              itemBuilder: (context, int index) {
                 Map products = snapshot.data[index];
                 return Card(
                     child: InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) =>
-                    //             ProductDetailPage(products['id'])));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ProductDetailPage(products[index])));
                   },
                   child: ListTile(
                     // leading: Image.network(products['images']['src']),
@@ -43,11 +43,36 @@ class _productPageState extends State<ProductPage> {
                       style: TextStyle(color: Colors.red),
                     ),
                   ),
+                  // child: Column(
+                  //   children: [
+                  //     Text(
+                  //       products['name'],
+                  //       style: TextStyle(
+                  //         fontSize: 18,
+                  //       ),
+                  //       textAlign: TextAlign.left,
+                  //     ),
+                  //     Text('Precio: \$' + products['price']),
+                  //     // Text('Restaurante: ' + products['tags']['name']),
+                  //     // Text('Categoria: ' + products['categories']['name']),
+                  //   ],
+                  // ),
                 ));
               },
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            // return Center(child: CircularProgressIndicator());
+            return Container(
+                padding: EdgeInsets.all(16.0),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Text('Cargando...'),
+                      SizedBox(height: 20.0),
+                      LinearProgressIndicator()
+                    ],
+                  ),
+                ));
           }
         },
       ),
