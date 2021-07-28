@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/image.dart' as flutterImage;
 import 'package:new_filopp/src/models/Product.dart';
@@ -29,8 +30,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               child: Column(children: [
                 // flutterImage.Image.network(products.images.src),
                 // flutterImage.Image.network(products['images']['src']),
-                flutterImage.Image.network(
-                    'https://via.placeholder.com/400x200'),
+                // flutterImage.Image.network(
+                //     'https://via.placeholder.com/400x200'),
+                CachedNetworkImage(
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  imageUrl: 'https://via.placeholder.com/400x200',
+                ),
                 SizedBox(height: 30.0),
                 Text(
                   products.name != null ? products.name : 'NombreProducto',

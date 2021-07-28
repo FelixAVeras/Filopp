@@ -37,10 +37,14 @@ class _productPageState extends State<ProductPage> {
                                 ProductDetailPage(products[index])));
                   },
                   child: ListTile(
-                    // leading:
-                    //     flutterImage.Image.network(products['images']['src']),
+                    // leading: flutterImage.Image.network(
+                    //             products['images']['src']) !=
+                    //         null
+                    //     ? flutterImage.Image.network(products['images']['src'])
+                    //     : flutterImage.Image.network(
+                    //         'https://via.placeholder.com/150'),
                     leading: flutterImage.Image.network(
-                        'https://via.placeholder.com/150'),
+                        'https://via.placeholder.com/200'),
                     title: Text(products['name']),
                     subtitle: Text(
                       'Precio: \$' + products['price'],

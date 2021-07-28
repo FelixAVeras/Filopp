@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_filopp/src/helpers/http_services.dart';
-// import 'package:new_filopp/src/helpers/http_services.dart';
-import 'package:new_filopp/src/pages/home.dart';
 import 'package:new_filopp/src/pages/login.dart';
-import 'package:new_filopp/src/pages/register.dart';
-// // // import 'package:personalmoney/bloc/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   @override

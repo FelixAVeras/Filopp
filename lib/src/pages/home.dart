@@ -26,11 +26,11 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         title: Text('Inicio'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            tooltip: 'Notificaciones',
-            onPressed: () {},
-          ),
+          // IconButton(
+          //   icon: const Icon(Icons.notifications),
+          //   tooltip: 'Notificaciones',
+          //   onPressed: () {},
+          // ),
           IconButton(
             icon: const Icon(Icons.search),
             tooltip: 'Buscar',
