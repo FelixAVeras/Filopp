@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/image.dart' as flutterImage;
 import 'package:new_filopp/src/pages/restaurant_detail.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -19,29 +20,29 @@ class DashboardPage extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: <Widget>[
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.90,
-                  color: Colors.red,
-                ),
+                    width: MediaQuery.of(context).size.width * 0.90,
+                    child: flutterImage.Image.network(
+                        'https://via.placeholder.com/600x200?text=Nombre+Categoria')),
                 SizedBox(width: 10),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.90,
-                  color: Colors.blue,
-                ),
+                    width: MediaQuery.of(context).size.width * 0.90,
+                    child: flutterImage.Image.network(
+                        'https://via.placeholder.com/600x200?text=Nombre+Categoria')),
                 SizedBox(width: 10),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.90,
-                  color: Colors.green,
-                ),
+                    width: MediaQuery.of(context).size.width * 0.90,
+                    child: flutterImage.Image.network(
+                        'https://via.placeholder.com/600x200?text=Nombre+Categoria')),
                 SizedBox(width: 10),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.90,
-                  color: Colors.yellow,
-                ),
+                    width: MediaQuery.of(context).size.width * 0.90,
+                    child: flutterImage.Image.network(
+                        'https://via.placeholder.com/600x200?text=Nombre+Categoria')),
                 SizedBox(width: 10),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.90,
-                  color: Colors.orange,
-                ),
+                    width: MediaQuery.of(context).size.width * 0.90,
+                    child: flutterImage.Image.network(
+                        'https://via.placeholder.com/600x200?text=Nombre+Categoria')),
               ],
             ),
           ),

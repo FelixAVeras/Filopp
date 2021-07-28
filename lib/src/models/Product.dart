@@ -24,7 +24,7 @@ class Product {
     this.relatedIds,
     this.categories,
     this.tags,
-    // this.images,
+    this.images,
     this.attributes,
     this.defaultAttributes,
     this.variations,
@@ -52,7 +52,7 @@ class Product {
   List<int> relatedIds;
   List<Category> categories;
   List<Category> tags;
-  // List<Image> images;
+  List<Image> images;
   List<dynamic> attributes;
   List<dynamic> defaultAttributes;
   List<dynamic> variations;
@@ -82,7 +82,7 @@ class Product {
             json["categories"].map((x) => Category.fromJson(x))),
         tags:
             List<Category>.from(json["tags"].map((x) => Category.fromJson(x))),
-        // images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
         attributes: List<dynamic>.from(json["attributes"].map((x) => x)),
         defaultAttributes:
             List<dynamic>.from(json["default_attributes"].map((x) => x)),
@@ -114,7 +114,7 @@ class Product {
         "related_ids": List<dynamic>.from(relatedIds.map((x) => x)),
         "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
         "tags": List<dynamic>.from(tags.map((x) => x.toJson())),
-        // "images": List<dynamic>.from(images.map((x) => x.toJson())),
+        "images": List<dynamic>.from(images.map((x) => x.toJson())),
         "attributes": List<dynamic>.from(attributes.map((x) => x)),
         "default_attributes":
             List<dynamic>.from(defaultAttributes.map((x) => x)),

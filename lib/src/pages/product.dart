@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/image.dart' as flutterImage;
 import 'package:new_filopp/src/models/Product.dart';
 import 'package:new_filopp/src/pages/product_detail.dart';
 import 'package:new_filopp/src/providers/product_provider.dart';
@@ -36,7 +37,10 @@ class _productPageState extends State<ProductPage> {
                                 ProductDetailPage(products[index])));
                   },
                   child: ListTile(
-                    // leading: Image.network(products['images']['src']),
+                    // leading:
+                    //     flutterImage.Image.network(products['images']['src']),
+                    leading: flutterImage.Image.network(
+                        'https://via.placeholder.com/150'),
                     title: Text(products['name']),
                     subtitle: Text(
                       'Precio: \$' + products['price'],

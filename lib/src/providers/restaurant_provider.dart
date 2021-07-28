@@ -1,32 +1,34 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:new_filopp/src/models/Restaurant.dart';
 
-class RestaurantProvider {
-  String _apikey = 'fc4b84dc54035cf532ba4246a84ff741';
-  String _url = 'api.themoviedb.org';
-  String _lang = 'es-ES';
+final String baseUrlV3 = 'https://mimapi.club/wp-json/wc/v3/';
 
-  ProcesedResponse(url) {}
+final String consumerKey =
+    'consumer_key=ck_a36ffd8a2b5ed5df6c7bb0bc607c2370cd9c5060';
 
-  //Restaurant List
-  Future<List<Restaurant>> GetAllRestaurants() async {
-    final url = Uri.https(
-        _url, '3/movie/new_playing', {'api_key': _apikey, 'lenguage': _lang});
+final String consumerSecret =
+    'consumer_secret=cs_4039f7c013c9a1a1ceec5f845efa6067637e1416';
 
-    final resp = await http.get(url);
-    final decodedData = json.decode(resp.body);
-    final restaurants = new Restaurants.fromJsonList(decodedData['results']);
+Future<List> restaurantList() async {
+  final restaurantUrl =
+      Uri.parse(baseUrlV3 + 'products/tags?$consumerKey&$consumerSecret');
 
-    return restaurants.items;
-  }
+  final response =
+      await http.get(restaurantUrl, headers: {"Accept": "application/json"});
 
-  //Search Restaurant
-  Future<List<Restaurant>> SearchRestaurant(String query) async {
-    final url =
-        Uri.https(_url, 'enpointApi', {'api_key': _apikey, 'query': query});
+  var jsonConvert = jsonDecode(response.body);
 
-    return await ProcesedResponse(url);
-  }
+  return jsonConvert;
 }
+
+// Future<Product> getRestaurantById(String id) async {
+//   final productIdUrl =
+//       Uri.parse(baseUrlV3 + 'products/$id?$consumerKey&$consumerSecret');
+//   final response = await http.get(productIdUrl);
+
+//   if (response.statusCode == 200) {
+//     return Product.fromJson(json.decode(response.body));
+//   } else {
+//     throw Exception('Failed to load a case');
+//   }
+// }

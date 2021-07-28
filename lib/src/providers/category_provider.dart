@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:new_filopp/src/models/Category.dart';
 import 'package:http/http.dart' as http;
 
 // class CategoryProvider {
@@ -42,7 +41,7 @@ Future<List> categoryList() async {
       'consumer_secret=cs_4039f7c013c9a1a1ceec5f845efa6067637e1416';
 
   final categoryUrl =
-      baseUrlV3 + 'products/categories?$consumerKey&$consumerSecret';
+      Uri.parse(baseUrlV3 + 'products/categories?$consumerKey&$consumerSecret');
 
   final response =
       await http.get(categoryUrl, headers: {"Accept": "application/json"});

@@ -23,7 +23,8 @@ Future<List> productList() async {
 }
 
 Future<Product> getProductById(String id) async {
-  final productIdUrl = baseUrlV3 + 'products/$id?$consumerKey&$consumerSecret';
+  final productIdUrl =
+      Uri.parse(baseUrlV3 + 'products/$id?$consumerKey&$consumerSecret');
   final response = await http.get(productIdUrl);
 
   if (response.statusCode == 200) {
