@@ -3,36 +3,87 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:new_filopp/src/models/Product.dart';
 
-final String baseUrlV3 = 'https://mimapi.club/wp-json/wc/v3/';
+class ProductProvider {
+  final String baseUrlV3 = 'https://mimapi.club/wp-json/wc/v3/';
 
-final String consumerKey =
-    'consumer_key=ck_a36ffd8a2b5ed5df6c7bb0bc607c2370cd9c5060';
+  final String consumerKey =
+      'consumer_key=ck_a36ffd8a2b5ed5df6c7bb0bc607c2370cd9c5060';
 
-final String consumerSecret =
-    'consumer_secret=cs_4039f7c013c9a1a1ceec5f845efa6067637e1416';
+  final String consumerSecret =
+      'consumer_secret=cs_4039f7c013c9a1a1ceec5f845efa6067637e1416';
 
-Future<List> productList() async {
-  final productUrl = baseUrlV3 + 'products?$consumerKey&$consumerSecret';
+  Future<List<Product>> getProducts() async {
+    final productUrl =
+        Uri.parse(baseUrlV3 + 'products?$consumerKey&$consumerSecret');
+    http.Response res =
+        await http.get(productUrl, headers: {"Accept": "application/json"});
 
-  final response =
-      await http.get(productUrl, headers: {"Accept": "application/json"});
+    if (res.statusCode == 200) {
+      List<dynamic> body = jsonDecode(res.body);
+      List<Product> products =
+          body.map((dynamic item) => Product.fromJson(item)).toList();
 
-  var jsonConvert = jsonDecode(response.body);
+      return products;
+    } else {
+      throw Exception('Algo Salio Mal');
+    }
+  }
 
-  return jsonConvert;
-}
+  Future<Product> getProductById(String id) async {
+    final productIdUrl =
+        Uri.parse(baseUrlV3 + 'products/$id?$consumerKey&$consumerSecret');
+    final response = await http.get(productIdUrl);
 
-Future<Product> getProductById(String id) async {
-  final productIdUrl =
-      Uri.parse(baseUrlV3 + 'products/$id?$consumerKey&$consumerSecret');
-  final response = await http.get(productIdUrl);
-
-  if (response.statusCode == 200) {
-    return Product.fromJson(json.decode(response.body));
-  } else {
-    throw Exception('Failed to load a case');
+    if (response.statusCode == 200) {
+      return Product.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load a case');
+    }
   }
 }
+
+// Future<List<Product>> productList() async {
+//   final productUrl = baseUrlV3 + 'products?$consumerKey&$consumerSecret';
+
+//   http.Response res =
+//       await http.get(productUrl, headers: {"Accept": "application/json"});
+
+//   if (res.statusCode == 200) {
+//     List<dynamic> body = jsonDecode(res.body);
+//     List<Product> products =
+//         body.map((dynamic item) => Product.fromJson(item)).toList();
+
+//     return products;
+//   } else {
+//     throw Exception('Failed to load a case');
+//   }
+
+// final response =
+//     await http.get(productUrl, headers: {"Accept": "application/json"});
+// var jsonConvert = jsonDecode(response.body);
+
+// // return jsonConvert;
+
+// if (response.statusCode == 200) {
+//   // return Product.fromJson(json.decode(response.body));
+//   // return jsonConvert;
+//   return Product.fromJson(jsonDecode(response.body));
+// } else {
+//   throw Exception('Failed to load a case');
+// }
+// }
+
+// Future<Product> getProductById(String id) async {
+//   final productIdUrl =
+//       Uri.parse(baseUrlV3 + 'products/$id?$consumerKey&$consumerSecret');
+//   final response = await http.get(productIdUrl);
+
+//   if (response.statusCode == 200) {
+//     return Product.fromJson(json.decode(response.body));
+//   } else {
+//     throw Exception('Failed to load a case');
+//   }
+// }
 
 // class ProductsProvider {
 // final String baseUrlV3 = 'https://mimapi.club/wp-json/wc/v3/';
