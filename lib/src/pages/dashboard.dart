@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/image.dart' as flutterImage;
-import 'package:new_filopp/src/pages/restaurant_detail.dart';
+import 'package:new_filopp/src/pages/restaurant/restaurant_detail.dart';
 
 class DashboardPage extends StatelessWidget {
   @override

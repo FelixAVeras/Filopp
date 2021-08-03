@@ -5,7 +5,7 @@ import 'package:new_filopp/src/pages/dashboard.dart';
 import 'package:new_filopp/src/pages/login.dart';
 import 'package:new_filopp/src/pages/my_order.dart';
 import 'package:new_filopp/src/pages/product/product.dart';
-import 'package:new_filopp/src/pages/restaurant.dart';
+import 'package:new_filopp/src/pages/restaurant/restaurant.dart';
 
 class HomePage extends StatefulWidget {
   final GlobalKey<ScaffoldState> parentScaffoldKey;

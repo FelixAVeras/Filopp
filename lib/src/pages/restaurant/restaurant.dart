@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_filopp/src/pages/restaurant/qrcode_page.dart';
 import 'package:new_filopp/src/providers/restaurant_provider.dart';
 
 class RestaurantPage extends StatelessWidget {
@@ -9,19 +10,31 @@ class RestaurantPage extends StatelessWidget {
           centerTitle: true,
           title: Text('Restaurantes'),
           actions: [
-            PopupMenuButton(
-                child: Padding(
-                  child: Text('Opciones'),
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            // PopupMenuButton(
+            //     child: Padding(
+            //       child: Text('Opciones'),
+            //       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            //     ),
+            //     itemBuilder: (context) => [
+            //           PopupMenuItem(
+            //             child: Text('Hacer Reservacion'),
+            //           ),
+            //           PopupMenuItem(
+            //             child: Text('Escanear Menu QR'),
+
+            //           )
+            //         ])
+            IconButton(
+                tooltip: 'Escanear Codigo',
+                icon: Icon(
+                  Icons.qr_code,
+                  color: Colors.white,
                 ),
-                itemBuilder: (context) => [
-                      PopupMenuItem(
-                        child: Text('Hacer Reservacion'),
-                      ),
-                      PopupMenuItem(
-                        child: Text('Escanear Menu QR'),
-                      )
-                    ])
+                // onPressed: _scan)
+                onPressed: () => {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => QRPage()))
+                    })
           ],
         ),
         body: FutureBuilder(
@@ -59,4 +72,20 @@ class RestaurantPage extends StatelessWidget {
               }
             }));
   }
+
+  // _scan() async {
+  //   String futureString = '';
+
+  //   try {
+  //     futureString = await new QRCodeReader().scan();
+  //   } catch (e) {
+  //     futureString = e.toString();
+  //   }
+
+  //   print('FutureString: $futureString');
+
+  //   if (futureString != null) {
+  //     print('TENEMOS INFORMACION');
+  //   }
+  // }
 }

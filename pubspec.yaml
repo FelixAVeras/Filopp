@@ -25,6 +25,9 @@ dependencies:
     sdk: flutter
   http:
   cached_network_image:
+  qr_flutter:
+  barcode_scan_fix: ^1.0.2
+  url_launcher:
 
 
   # The following adds the Cupertino Icons font to your application.
