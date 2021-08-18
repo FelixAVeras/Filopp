@@ -1,6 +1,8 @@
 import 'package:barcode_scan_fix/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:new_filopp/src/pages/restaurant/webview.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class QRPage extends StatefulWidget {
   @override
@@ -38,6 +40,17 @@ class _ScanQRPageState extends State<QRPage> {
             SizedBox(
               height: 20.0,
             ),
+            RaisedButton(
+                child: Text(
+                  'Ir al Enlace',
+                  style: TextStyle(color: Colors.white),
+                ),
+                padding: EdgeInsets.all(15),
+                color: Colors.red,
+                onPressed: () => {launch(qrCodeResult)}),
+            SizedBox(
+              height: 20.0,
+            ),
 
             //Button to scan QR code
             FlatButton(
@@ -51,12 +64,12 @@ class _ScanQRPageState extends State<QRPage> {
               },
               child: Text(
                 "Scannear",
-                style: TextStyle(color: Colors.indigo[900]),
+                style: TextStyle(color: Colors.red),
               ),
               //Button having rounded rectangle border
               shape: RoundedRectangleBorder(
-                side: BorderSide(color: Colors.indigo[900]),
-                borderRadius: BorderRadius.circular(20.0),
+                side: BorderSide(color: Colors.red),
+                borderRadius: BorderRadius.circular(5.0),
               ),
             ),
           ],
