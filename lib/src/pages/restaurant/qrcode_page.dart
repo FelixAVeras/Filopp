@@ -1,7 +1,6 @@
 import 'package:barcode_scan_fix/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:new_filopp/src/pages/restaurant/webview.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class QRPage extends StatefulWidget {
