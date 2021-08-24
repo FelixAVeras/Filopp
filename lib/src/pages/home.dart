@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_filopp/src/helpers/search_delegate.dart';
-import 'package:new_filopp/src/pages/category.dart';
+import 'package:new_filopp/src/pages/address/myAddress.dart';
+import 'package:new_filopp/src/pages/category/category.dart';
 import 'package:new_filopp/src/pages/dashboard.dart';
 import 'package:new_filopp/src/pages/login.dart';
 import 'package:new_filopp/src/pages/my_order.dart';
@@ -42,14 +43,6 @@ class _HomePageState extends State<HomePage> {
       ),
       body: _loadPage(currentIndex),
       bottomNavigationBar: _customBottomNavigationBar(),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   label: Text('Nueva Orden'),
-      //   icon: Icon(Icons.add),
-      //   onPressed: () => {
-      //     // Navigator.push(
-      //     //     context, MaterialPageRoute(builder: (context) => ProductPage()))
-      //   },
-      // ),
       drawer: Drawer(
           child: ListView(
         padding: EdgeInsets.zero,
@@ -60,12 +53,14 @@ class _HomePageState extends State<HomePage> {
                 image: DecorationImage(
                     image: AssetImage('assets/drawerHeaderBG.jpg'),
                     fit: BoxFit.cover)),
-            child: Text('Filopp'),
+            child: Text('Filopp',
+                style: TextStyle(color: Colors.white, fontSize: 24)),
           ),
           ListTile(
             leading: Icon(Icons.grid_view),
             title: Text('Categorias'),
             onTap: () => {
+              Navigator.of(context).pop(),
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => CategoryPage()))
             },
@@ -75,6 +70,7 @@ class _HomePageState extends State<HomePage> {
             leading: Icon(Icons.menu_book),
             title: Text('Menu'),
             onTap: () => {
+              Navigator.of(context).pop(),
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ProductPage()))
             },
@@ -84,6 +80,7 @@ class _HomePageState extends State<HomePage> {
             leading: Icon(Icons.restaurant),
             title: Text('Restaurantes'),
             onTap: () => {
+              Navigator.of(context).pop(),
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => RestaurantPage()))
             },
@@ -108,15 +105,20 @@ class _HomePageState extends State<HomePage> {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Ajustes'),
-            onTap: () => {},
+            leading: Icon(Icons.pin_drop),
+            title: Text('Mis Direcciones'),
+            onTap: () => {
+              Navigator.of(context).pop(),
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MyAddressPage()))
+            },
           ),
           Divider(),
           ListTile(
             leading: Icon(Icons.logout),
             title: Text('Cerrar Sesión'),
             onTap: () => {
+              Navigator.of(context).pop(),
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => LoginPage()))
             },
