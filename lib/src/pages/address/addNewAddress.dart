@@ -14,7 +14,13 @@ class _NewAddressPageState extends State<NewAddressPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Nueva Direccion'),
-        actions: [IconButton(icon: Icon(Icons.more_vert), onPressed: null)],
+        actions: [
+          PopupMenuButton(
+              icon: Icon(Icons.more_vert),
+              itemBuilder: (context) => [
+                    PopupMenuItem(child: Text('Ubicacion GPS')),
+                  ])
+        ],
       ),
       body: Form(
         key: _addFormKey,

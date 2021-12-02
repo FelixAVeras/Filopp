@@ -4,7 +4,7 @@ import 'package:new_filopp/src/pages/address/myAddress.dart';
 import 'package:new_filopp/src/pages/category/category.dart';
 import 'package:new_filopp/src/pages/dashboard.dart';
 import 'package:new_filopp/src/pages/login.dart';
-import 'package:new_filopp/src/pages/my_order.dart';
+import 'package:new_filopp/src/pages/order/my_order.dart';
 import 'package:new_filopp/src/pages/product/product.dart';
 import 'package:new_filopp/src/pages/restaurant/restaurant.dart';
 
@@ -27,11 +27,6 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         title: Text('Inicio'),
         actions: [
-          // IconButton(
-          //   icon: const Icon(Icons.notifications),
-          //   tooltip: 'Notificaciones',
-          //   onPressed: () {},
-          // ),
           IconButton(
             icon: const Icon(Icons.search),
             tooltip: 'Buscar',

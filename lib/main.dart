@@ -18,8 +18,7 @@ class NewFilopp extends StatelessWidget {
       title: 'Filopp',
       theme: ThemeData(primarySwatch: Colors.red),
       debugShowCheckedModeBanner: false,
-      initialRoute: 'home',
-      // initialRoute: 'login',
+      initialRoute: 'login',
       routes: {
         'login': (BuildContext context) => LoginPage(),
         'register': (BuildContext context) => RegisterPage(),
